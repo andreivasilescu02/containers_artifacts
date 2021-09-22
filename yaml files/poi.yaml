@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kube-team3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poi
+  namespace: kube-team3
+  labels:
+    app: "poi"  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: poi
+  template:
+    metadata:
+      labels:
+        app: poi
+    spec:
+      containers:
+      - name: poi
+        image: registrysub5559.azurecr.io/tripinsights/poi:1.0
+        ports:
+        - containerPort: 80
