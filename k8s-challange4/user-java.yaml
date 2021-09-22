@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: user-java
+  name: user-java
+  namespace: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-java
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: user-java
+    spec:
+      containers:
+      - image: registrysub5559.azurecr.io/tripinsights/user-java:1.0
+        name: user-java
+        ports:
+        - containerPort: 80
+        env:
+          - name: SQL_SERVER
+            valueFrom:
+              configMapKeyRef:
+                name: azure-mssql
+                key: SQL_SERVER
+          - name: SQL_DBNAME
+            valueFrom:
+              configMapKeyRef:
+                name: azure-mssql
+                key: SQL_DBNAME
+          - name: SQL_USER
+            valueFrom:
+              secretKeyRef: 
+                name: azure-mssql-secret
+                key: SQL_USER
+          - name: SQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: azure-mssql-secret
+                key: SQL_PASSWORD
+        resources: {}
+status: {}
