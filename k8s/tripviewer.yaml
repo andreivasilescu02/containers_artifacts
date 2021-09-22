@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: tripviewer
+  name: tripviewer
+  namespace: kube-team3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tripviewer
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: tripviewer
+    spec:
+      containers:
+      - image: registrysub5559.azurecr.io/tripinsights/tripviewer
+        name: tripviewer
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}

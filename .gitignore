@@ -331,3 +331,5 @@ ASALocalRun/
 
 # VSCode Local Settings
 *.vscode
+k8s/azure-mssql.yaml
+k8s/azure-mssql-secret.yaml

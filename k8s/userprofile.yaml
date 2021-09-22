@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: userprofile
+  name: userprofile
+  namespace: kube-team3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: userprofile
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: userprofile
+    spec:
+      containers:
+      - image: registrysub5559.azurecr.io/tripinsights/userprofile
+        name: userprofile
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: trips
+  name: trips
+  namespace: kube-team3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trips
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: trips
+    spec:
+      containers:
+      - image: registrysub5559.azurecr.io/tripinsights/trips
+        name: trips
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
