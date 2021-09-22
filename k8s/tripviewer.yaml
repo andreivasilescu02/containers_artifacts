@@ -17,9 +17,34 @@ spec:
         app: tripviewer
     spec:
       containers:
-      - image: registrysub5559.azurecr.io/tripinsights/tripviewer
+      - image: registrysub5559.azurecr.io/tripinsights/tripviewer:1.0
         name: tripviewer
         ports:
         - containerPort: 80
         resources: {}
+        env:
+          - name: USERPROFILE_API_ENDPOINT
+            value: http://userprofile-svc.kube-team3.svc.cluster.local
+            #value: http://10.240.1.8:80
+          - name: TRIPS_API_ENDPOINT
+            value: http://trips-svc.kube-team3.svc.cluster.local
+            #value: http://10.240.0.118:80
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Development
 status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: tripviewer
+  name: tripviewer-svc
+  namespace: kube-team3
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: tripviewer
+  type: LoadBalancer

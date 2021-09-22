@@ -17,9 +17,45 @@ spec:
         app: userprofile
     spec:
       containers:
-      - image: registrysub5559.azurecr.io/tripinsights/userprofile
+      - image: registrysub5559.azurecr.io/tripinsights/userprofile:1.0
         name: userprofile
         ports:
         - containerPort: 80
         resources: {}
+        env:
+          - name: SQL_SERVER
+            valueFrom:
+              configMapKeyRef:
+                name: azure-mssql
+                key: SQL_SERVER
+          - name: SQL_DBNAME
+            valueFrom:
+              configMapKeyRef:
+                name: azure-mssql
+                key: SQL_DBNAME
+          - name: SQL_USER
+            valueFrom:
+              secretKeyRef: 
+                name: azure-mssql-secret
+                key: SQL_USER
+          - name: SQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: azure-mssql-secret
+                key: SQL_PASSWORD
 status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: userprofile
+  name: userprofile-svc
+  namespace: kube-team3
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: userprofile
