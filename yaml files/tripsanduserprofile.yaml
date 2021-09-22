@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: trips
+  namespace: kube-team3
+  labels:
+    run: trips
+spec:
+  selector:
+    run: trips
+  ports:
+  - port: 80
+    targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: userprofile
+  namespace: kube-team3
+  labels:
+    run: userprofile
+spec:
+  selector:
+    run: userprofile
+  ports:
+  - port: 80
+    targetPort: 80
