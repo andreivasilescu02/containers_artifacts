@@ -49,12 +49,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    run: trips
+    app: trips
   name: trips-svc
   namespace: kube-team3
 spec:
   selector:
-    run: trips
+    app: trips
   ports:
   - port: 80
     protocol: TCP
