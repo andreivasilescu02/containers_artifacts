@@ -25,10 +25,8 @@ spec:
         env:
           - name: USERPROFILE_API_ENDPOINT
             value: http://userprofile-svc
-            #value: http://10.240.1.8:80
           - name: TRIPS_API_ENDPOINT
             value: http://trips-svc
-            #value: http://10.240.0.118:80
           - name: ASPNETCORE_ENVIRONMENT
             value: Development
 status: {}
