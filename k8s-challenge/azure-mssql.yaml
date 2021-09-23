@@ -1,8 +1,0 @@
-apiVersion: v1
-data:
-  SQL_DBNAME: mydrivingDB
-  SQL_SERVER: sqlserversub5559.database.windows.net
-kind: ConfigMap
-metadata:
-  name: azure-mssql
-  namespace: api
