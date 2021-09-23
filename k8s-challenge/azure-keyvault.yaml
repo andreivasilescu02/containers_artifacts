@@ -1,0 +1,31 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
+kind: SecretProviderClass
+metadata:
+  name: aks-akv-team3
+  namespace: api
+spec:
+  provider: azure
+  parameters:
+    keyvaultName: "aks-akv-team3"     # The name of the Azure Key Vault
+    useVMManagedIdentity: "true"         
+    userAssignedIdentityID: "e3e491a0-1b61-49e8-997d-cba4f46806c6" # The clientId of the addon-created managed identity
+    cloudName: ""                         # [OPTIONAL for Azure] if not provided, Azure environment will default to AzurePublicCloud 
+    objects:  |
+      array:
+        - |
+          objectName: db-name      # In this example, 'ExampleSecret'   
+          objectType: secret              # Object types: secret, key or cert
+          objectAlias: SQL_DBNAME
+        - |
+          objectName: db-user      # In this example, 'ExampleSecret'   
+          objectType: secret              # Object types: secret, key or cert
+          objectAlias: SQL_USER
+        - |
+          objectName: db-password      # In this example, 'ExampleSecret'   
+          objectType: secret              # Object types: secret, key or cert
+          objectAlias: SQL_PASSWORD
+        - |
+          objectName: db-fqdn      # In this example, 'ExampleSecret'   
+          objectType: secret              # Object types: secret, key or cert
+          objectAlias: SQL_SERVER
+    tenantId: "ddf72b8b-5e13-4d38-9e3a-0e50d894a29e"  
